@@ -12,13 +12,12 @@ function App() {
 
   const sendFunc = async () => {
     const formData = new FormData();
-    formData.append('test','test')
+    formData.append('order',getRandomInt(10000))
 
     for(let i = 0, len =files.length; i<len; i++){
       formData.append(`files-${i}`,files[i], files[i].name)
     }
-
-
+    
     try {
       const data = await axios({
         url:'http://localhost/react_php_formdata/app_data.php',
@@ -39,7 +38,11 @@ function App() {
     } finally {
     }
   }
-  console.log(files)
+  
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   return (
     <div className="App">
        <input type="file" name="images" onChange={onSelectFile} multiple accept='image/png, image/jpeg, image/webp .mov,.mp4'/>
